@@ -1,0 +1,139 @@
+# Family Tree Web Application - Complete Documentation
+
+## 📁 Project Structure Overview
+
+This is a Next.js 14 family tree application with MongoDB backend, JWT authentication, and a comprehensive family tree visualization system.
+
+## 🗂️ Root Directory Files
+
+### Configuration Files
+- **package.json** - Project dependencies and scripts
+- **next.config.mjs** - Next.js configuration
+- **tailwind.config.ts** - Tailwind CSS configuration with shadcn/ui setup
+- **tsconfig.json** - TypeScript configuration
+- **postcss.config.js** - PostCSS configuration for Tailwind
+- **.env.local** - Environment variables (MongoDB URI, JWT secret)
+
+## 📂 Directory Structure
+
+### `/app` - Next.js App Router Structure
+
+#### **Root Pages**
+- **`page.js`** - Landing page with hero section and feature showcase
+- **`layout.tsx`** - Root layout with theme provider and global styles
+- **`globals.css`** - Global CSS with Tailwind and shadcn/ui styles
+
+#### **`/app/auth`** - Authentication Pages
+- **`/login/page.js`** - User login form with JWT token handling
+- **`/register/page.js`** - User registration form with validation
+
+#### **`/app/dashboard`** - User Dashboard
+- **`page.js`** - Main dashboard showing user's family trees with create/view options
+
+#### **`/app/family-tree`** - Family Tree Management
+- **`/create/page.js`** - Form to create new family tree with root person
+- **`/[id]/page.js`** - Dynamic route for viewing/editing specific family tree
+
+#### **`/app/test-db`** - Development Tools
+- **`page.js`** - Database connection testing page
+
+#### **`/app/api`** - Backend API Routes
+
+##### **`/app/api/auth`** - Authentication Endpoints
+- **`/login/route.js`** - POST: User login with password verification
+- **`/register/route.js`** - POST: User registration with password hashing
+
+##### **`/app/api/family-trees`** - Family Tree Management
+- **`route.js`** - GET: Fetch all family trees for authenticated user
+- **`/check/[lastName]/route.js`** - GET: Check if family tree with lastName exists
+- **`/create/route.js`** - POST: Create new family tree with root person
+
+##### **`/app/api/family-trees/[id]`** - Specific Tree Operations
+- **`route.js`** - GET: Fetch specific family tree with full structure
+- **`/add-member/route.js`** - POST: Add family members (child, spouse, parent, sibling)
+- **`/edit-member/route.js`** - PUT: Edit existing family member details
+- **`/delete-member/route.js`** - DELETE: Remove family member from tree
+- **`/delete/route.js`** - DELETE: Delete entire family tree
+- **`/export/route.js`** - GET: Export family tree data as JSON
+- **`/debug/route.js`** - GET: Debug endpoint for tree structure inspection
+
+##### **`/app/api/test-db`** - Database Testing
+- **`route.js`** - GET: Test MongoDB connection
+
+### `/components` - Reusable React Components
+
+#### **Core Components**
+- **`add-member-dialog.js`** - Modal for adding new family members with form validation
+- **`edit-member-dialog.js`** - Modal for editing existing family member details
+- **`family-tree-visualization.js`** - Main tree visualization with interactive nodes and connections
+
+#### **`/components/ui`** - shadcn/ui Components
+- **`button.jsx`** - Customizable button component
+- **`card.jsx`** - Card container component
+- **`input.jsx`** - Form input component
+- **`label.jsx`** - Form label component
+- **`select.jsx`** - Dropdown select component
+- **`alert.jsx`** - Alert/notification component
+- **`alert-dialog.jsx`** - Confirmation dialog component
+- **`dialog.jsx`** - Modal dialog component
+- **`badge.jsx`** - Small badge/tag component
+
+### `/lib` - Utility Libraries
+
+#### **Core Utilities**
+- **`mongodb.js`** - MongoDB connection setup with connection pooling
+- **`auth.js`** - JWT token generation/verification and password hashing
+- **`db-operations.js`** - Database CRUD operations for users and family trees
+- **`tree-utils.js`** - Tree data sanitization and relationship building
+- **`test-connection.js`** - Database connection testing utility
+- **`utils.ts`** - General utility functions (cn for className merging)
+
+#### **`/hooks`** - Custom React Hooks
+- **`use-mobile.tsx`** - Hook for mobile device detection
+- **`use-toast.ts`** - Toast notification hook
+
+### `/public` - Static Assets
+- **`default-avatar.png`** - Default profile picture for family members
+
+## 🔧 Key Features & Functionality
+
+### **Authentication System**
+- JWT-based authentication with secure token storage
+- Password hashing using bcryptjs
+- Protected routes with middleware
+
+### **Family Tree Management**
+- **Create Trees**: Start with root person, add unlimited generations
+- **Add Members**: Children, spouses, parents, siblings with full relationship mapping
+- **Edit Members**: Update personal information, photos, life status
+- **Delete Members**: Remove individuals or entire trees
+- **Multi-generational Support**: Unlimited parent generations going upward
+
+### **Tree Visualization**
+- **Interactive Nodes**: Click to select, hover for details
+- **Seamless Connections**: Professional line drawing between family members
+- **Zoom & Pan**: Scale and navigate large family trees
+- **Search**: Find family members by name
+- **Focus Mode**: Center view on specific person
+- **Export**: Download tree data as JSON
+
+### **Data Structure**
+- **Person Object**: Complete personal information with relationships
+- **Tree Structure**: Hierarchical family relationships with spouse connections
+- **Circular Reference Prevention**: Clean data structure without infinite loops
+
+### **Database Schema**
+- **Users Collection**: User accounts with authentication
+- **Family Trees Collection**: Complete tree structures with embedded relationships
+
+## 🚀 Getting Started
+
+### **Prerequisites**
+- Node.js 18+
+- MongoDB Atlas account
+- Environment variables configured
+
+### **Installation**
+```bash
+pnpm install
+pnpm dev
